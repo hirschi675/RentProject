@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent It</title>
+    <link rel="stylesheet" type="text/css" href="sign-up.css">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="app">
+        <div id="alert-bar">
+            <a id="alert" href="index.html"><div id="covid"> Covid-19 Response & Regulations</div></a>
+        </div>
+        <nav>
+            <a href="index.html" id="logo"><img src="./images/rent_items_logo.jpg" alt="logo" height="60px"></a>
+            <ul id="myNav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="rent.html">Rent</a></li>
+                <li><a href="sign-up.html">Sign Up</a></li>
+                <li><a href="login.html">{{currentLogin}}</a></li>
+                <li><a href="create.html">Create</a></li>
+            </ul>
+        </nav>
+            <br>
+            <br>
+            <!-- <div id="userSign"> -->
+                <!-- <h2> Sign Up Form</h2>
+                <h3>Email</h3>
+                <input id="loginEmail" v-model="email">
+                <h3>Username</h3>
+                <input id="loginUser" v-model="user">
+                <h3>Password</h3>
+                <input id="loginPassword" v-model="password">
+                <button id="loginBut" v-on:click="submitUser">Submit</button> -->
+            <!-- </div> -->
+
+            <div id="userSign" method="post" style="margin: auto; display: block; text-align: center;">
+                <h2>Sign Up</h2>
+                <input type="text" name="eposta" placeholder="Email" autocomplete="false" v-model="signEmail">
+                <input type="text" name="eposta" placeholder="User" autocomplete="false" v-model="signUserInput">
+                <input type="password" name="sifre" placeholder="Password" v-model="signPassword">
+                <button id="submit" v-on:click="signUser">Submit</button>
+            </div>
+  
+
+    
+    </div>    
+    <footer>
+        <li><a href="index.html" id="foot-home">Home</a></li>
+        <li><a href="rent.html" id="foot-rent">Rent</a></li>
+        <li><a href="sign-up.html" id="foot-sign">Sign Up</a></li>
+        <li><a href="login.html" id="foot-login">Login</a></li>
+        <div id="copy_right">&copy; 2021</div>
+    </footer>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="app.js"></script>
+<script src="script.js"></script>
+</html>
+
+
+

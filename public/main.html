@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent It</title>
+    <link rel="stylesheet" type="text/css" href="mainstyle.css">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="app">
+        <div id="alert-bar">
+            <div id="copy_right">&copy; 2021</div>
+            <a id="alert" href="index.html"><div id="covid"> Covid-19 Response & Regulations</div></a>
+        </div>
+        <nav>
+            <a href="" id="logo"><img src="./images/rent_items_logo.jpg" alt="logo" height="60px"></a>
+            <ul id="myNav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="rent.html">Rent</a></li>
+                <li><a href="sign-up.html">Sign Up</a></li>
+                <li><a href="login.html">{{currentLogin}}</a></li>
+                <li><a href="create.html">Create</a></li>
+            </ul>
+        </nav>
+        <div id="big-hero">
+            <div id="button-area">
+            <a href="rent.html"><button id="rent-button" class="action-button">Rent</button></a>
+            <a href="rent.htl"><button id="account-button" class="action-button">Account</button></a>
+            </div>
+        </div>
+        <div id="items-wrapper">
+            <a href="rent.html"><img src="images/activities.jpg" id="activities" width="165" height="180" /><div style="margin-left: 40px;" class="category">Activities</div></a>
+            <a href="rent.html"><img src="images/tools.jpg" id="tools" width="165" height="180" /><div style="margin-left: 55px;" class="category">Tools</div></a>
+            <a href="rent.html"><img src="images/techonology.jpg" id="technology" width="165" height="180" /><div style="margin-left: 30px;" class="category">Technology</div></img></a>
+        </div>
+        <div id="about-it">
+            <img id="money-image" src="images/money.jpg" width="250" height="200">
+            <div id="words">
+                <p> 
+                    This website is designed to help you make some side money with very little effort.  All you have to do post items that you don't use or
+                    even just things you are willing to rent so everyone can use them.  They will pay you to rent thoughs items out and you can specify a price
+                    and an amount of time to rent it out.
+                </p>
+            </div>
+        </div>
+        <div id="reviews-area">
+            <div id="review-title">
+                <h1>Reviews</h1>
+                <!-- <div id="stars">* * * *</div> -->
+            </div>
+            <div id="list-reviews">
+                <div id="rev1" class="review">This is a really good way to get some money off the things that you don't use
+                    anymore in your own home.  You can just place thoughs items up to rent and see if anyone needs them.  
+                    The bigger the item the more the cash you can rent it out for.  They could implement some features but 
+                    for now it's a really good site overall.
+                <br>
+                <br>
+                <div>✰✰✰✰</div>
+                </div>
+                <div id="rev2" class="review">This is a really good way to get some money off the things that you don't use
+                    anymore in your own home.  You can just place thoughs items up to rent and see if anyone needs them.  
+                    The bigger the item the more the cash you can rent it out for.  They could implement some features but 
+                    for now it's a really good site overall.
+                    <br>
+                    <br>
+                    <div>✰✰✰✰</div>
+                </div>
+                <div id="rev3" class="review">This is a really good way to get some money off the things that you don't use
+                    anymore in your own home.  You can just place thoughs items up to rent and see if anyone needs them.  
+                    The bigger the item the more the cash you can rent it out for.  They could implement some features but 
+                    for now it's a really good site overall.
+                    <br>
+                    <br>
+                    <div>✰✰✰✰</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <footer>
+        <li><a href="index.html" id="foot-home">Home</a></li>
+        <li><a href="rent.html" id="foot-rent">Rent</a></li>
+        <li><a href="sign-up.html" id="foot-sign">Sign Up</a></li>
+        <li><a href="login.html" id="foot-login">Login</a></li>
+    </footer>
+    <div v-if="rentShow">
+        <div class="search">
+            <input type="text" class="searchTerm" placeholder="What are you looking for?">
+            <button type="submit" class="searchButton">
+            <i class="fa fa-search"></i>
+        </button>
+        </div>
+    </div>
+    <div id="items-rent-area">     
+        <div v-for="item in items">
+            <div class="item"> 
+                <div v-if="activityimg">
+                    <img src="images/activities.jpg" class="picture" height="200" width="200"/><br>
+                </div>
+                <div v-if="toolimg">
+                    <img src="images/tools.jpg" class="picture" height="200" width="200"/><br>
+                </div>
+                <div v-if="technologyimg">
+                    <img src="images/techonology.jpg" class="picture" height="200" width="200"/><br>
+                </div>
+                <div class="name"> {{ item.name }} </div>
+                <div class="price"> ${{ item.price }}.00</div>
+                <div class="description"> {{item.description}}</div>
+                <button class="rent-button">Rent</button>
+            </div>
+        </div>     
+    </div>
+    <div id="settings">
+        <div id="category">
+            <h2 class="header2">Categroy</h2>
+            <ul class="options" style="list-style-type: none;">
+                <button v-on:click="displayActivities" id="submit" class="button" ><li >Activities</li></button><br><br>
+                <button v-on:click="displayTools" style="font-size: 22px;" class="button"><li>Tools</li></button><br><br>
+                <button v-on:click="displayTechnologies" style="font-size: 22px;" class="button"><li>Technology</li></button>
+            </ul>
+        </div>
+        <div id="other">
+            <h2 class="header2">Other</h2>
+            <ul class="options">
+                <li>Price</li>
+                <li>Time</li>
+                <li>Technology</li>
+                <li>Activities</li>
+                <li>Tools</li>
+                <li>Technology</li>
+                <li>Activities</li>
+                <li>Tools</li>
+                <li>Technology</li>
+            </ul>
+        </div>
+         </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="app.js"></script>
+<script src="script.js"></script>
+</html>

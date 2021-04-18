@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent It</title>
+    <link rel="stylesheet" type="text/css" href="./create.css">
+</head>
+<body>
+  <div id="app">
+    <div id="alert-bar">
+        <a id="alert" href="index.html"><div id="covid"> Covid-19 Response & Regulations</div></a>
+    </div>
+    <nav>
+        <a href="index.html" id="logo"><img src="./images/rent_items_logo.jpg" alt="logo" height="60px"></a>
+        <ul id="myNav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="rent.html">Rent</a></li>
+            <li><a href="sign-up.html">Sign Up</a></li>
+            <li><a href="login.html">{{currentLogin}}</a></li>
+            <li><a href="create.html">Create</a></li>
+        </ul>
+    </nav>
+    <h1>Create an Item</h1>
+    <div id="app">
+      <div v-if="addMode" style="padding:5px;">
+        <div v-if="errorMessages.length > 0">
+          There was a problem saving your item!
+          <ul>
+            <li v-for="error in errorMessages">
+              {{ error }}
+            </li>
+          </ul>
+        </div>
+        <!-- <div style="margin-left: 10px;"> -->
+           <a href="./create.html"> <button style="margin-left: 100px;">X</button></a>
+            <div style="display: block; margin: 0 auto; width: 500px; margin-bottom: 20px; padding: 10px; background-color: lightgray; text-align: center;">
+            <h2 v-if="activityMake">New Activity</h2>
+            <h2 v-if="toolMake">New Tool</h2>
+            <h2 v-if="technologyMake">New Technology</h2>
+            <form action="/items/items" method="POST" enctype="multipart/form-data">
+              Name: <input type="text" name="myName" v-model="itemName" /><br><br>
+              Price: <input type="text" name="myPrice" v-model="itemPrice" /><br><br>
+              <!-- category: --> <input id="categoryInput" type="text" name="myCategory" v-model="categoryInput" style="display: none;" />
+               <!-- user: --> <input id="userInput" type="text" name="myUser" v-model="userInput" style="display: none;" />
+              <!-- Owner: <input type="text" v-model="itemOwner"><br><br> -->
+              <img id="output" width="200" />
+              <div>Image:</div><input type="file" accept="image/*" name="myImage" onchange="loadFile(event)" >
+              <input id="submitFormButton" type="submit" value="upload" style="display: none;">
+              Description: <br> <textarea id="myDescription" name="myDescription" rows="4" cols="50" v-model="itemDescription"></textarea><br><br>
+            </form>
+            <button id="createButton" v-on:click="submitNewItem">Submit</button>
+        </div>
+      </div>
+      <!-- <div v-else>
+        <div v-if="currentItem">
+          <h2>Item Info</h2>
+          Name: {{ currentItem.name }}<br>
+          Price: {{ currentItem.price }}<br>
+          Owner: {{ currentItem.owner }}<br>
+          Category: {{ currentItem.category }}<br>
+          <button @click="closeItemDetails">Close</button>
+        </div> -->
+        <div v-else>
+          <button v-on:click="addActivity" class="action-button">Add Activity</button><br><br>
+          <button v-on:click="addTool" class="action-button">Add Tool</button><br><br>
+          <button v-on:click="addTechnology" class="action-button">Add Technology</button>
+          <ol class="item-list">
+            <li class="item" v-for="item in items">
+              <div>
+                <strong>Name:</strong> {{ item.name }}
+              </div>
+              <div>
+                <strong>Price:</strong> {{ item.price }}
+              </div>
+              <button v-on:click="showItemDetails(item)">></button>
+              <button v-on:click="editItem(item)">Edit</button>
+              <button @click="removeItem(item)">X</button>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+    <footer style="margin-top: 120px;">
+        <li><a href="index.html" id="foot-home">Home</a></li>
+        <li><a href="rent.html" id="foot-rent">Rent</a></li>
+        <li><a href="sign-up.html" id="foot-sign">Sign Up</a></li>
+        <li><a href="login.html" id="foot-login">Login</a></li>
+        <div id="copy_right">&copy; 2021</div>
+    </footer>
+
+
+
+
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="app.js"></script>
+<script src="script.js"></script>
+<script>
+  var loadFile = function(event) {
+    var image = document.getElementById('output');
+    image.src = URL.createObjectURL(event.target.files[0]);
+  };
+  </script>
+</html>

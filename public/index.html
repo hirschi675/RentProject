@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent It</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" crossorigin="anonymous">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="app">
+        <div id="alert-bar">
+            <a id="alert" href="index.html"><div id="covid"> Covid-19 Response & Regulations</div></a>
+        </div>
+        <nav>
+            <a href="" id="logo"><img src="./images/rent_items_logo.jpg" alt="logo" height="60px"></a>
+            <ul id="myNav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="rent.html">Rent</a></li>
+                <li><a href="sign-up.html">Sign Up</a></li>
+                <li><a href="login.html">{{currentLogin}}</a></li>
+                <li><a href="create.html">Create</a></li>
+            </ul>
+        </nav>
+        <div id="big-hero">
+            <div id="button-area">
+            <a href="rent.html"><button id="rent-button" class="action-button">Rent</button></a>
+            <a href="rent.htl"><button id="account-button" class="action-button">Account</button></a>
+            </div>
+        </div>
+        <div id="items-wrapper">
+            <!-- <param name="autoplay" value="true"> -->
+            <a href="rent.html" v-on:click="displayActivities"><img src="images/activities.jpg" id="activities" width="165" height="180" style="border: solid black 3px;" /><div style="margin-left: 40px;" class="category" v-on:click="displayActivities">Activities</div></a>
+            <a href="rent.html" v-on:click="displayTools"><img src="images/tools.jpg" id="tools" width="165" height="180" style="border: solid black 3px;"/><div style="margin-left: 55px;" class="category">Tools</div></a>
+            <a href="rent.html" v-on:click="displayTechnologies"><img src="images/techonology.jpg" id="technology" width="165" height="180" style="border: solid black 3px;" /><div style="margin-left: 30px;" class="category">Technology</div></img></a>
+        </div>
+        <div id="about-it">
+            <img id="money-image" src="images/money.jpg" width="250" height="200">
+            <div id="words">
+                <p> 
+                    This website is designed to help you make some side money with very little effort.  All you have to do post items that you don't use or
+                    even just things you are willing to rent so everyone can use them.  They will pay you to rent those items out and you can specify a price
+                    and an amount of time to rent it out.
+                </p>
+            </div>
+        </div>
+        <div id="reviews-area">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+                    <div class="ratingNumber">5.0</div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 ratingStars">
+                    <div class="rating"><a class="external-link contrast-link" href="rent.html" rel="noopener">217 Reviews</a></div>
+                    <div class="rating"><i class="fas fa-star">&nbsp;<i class="fas fa-star">&nbsp;</i><i class="fas fa-star">&nbsp;</i><i class="fas fa-star">&nbsp;</i><i class="fas fa-star">&nbsp;</i></i></div>
+                    </div>
+                    </div>
+                    <div>
+                    <h2 class="text--center"><strong>Recent Reviews</strong><br /><i class="fas fa-angle-double-down">&nbsp;</i></h2>
+                    </div>
+                    <div class="row">
+                    <div class="col-lg-4 col-xl-4">
+                    <div class="item">
+                    <h2 class="author"><i class="far fa-user-circle">&nbsp;</i>Andrew</h2>
+                    <i class="fa fa-quote-left"></i>
+                    <div class="quote">
+                    <p><strong>Great Banker to Work With</strong><strong>:</strong></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin placerat enim nec dapibus vestibulum. Integer et libero et enim posuere maximus ut vel libero. Fusce semper sem et nulla gravida, at ultricies turpis ultrices. Nullam a purus sed massa tincidunt finibus. Morbi nulla tortor, dictum et ante id, sodales auctor sapien. Etiam id nunc maximus mi elementum dapibus nec sed urna. Integer sit amet sagittis mauris. Pellentesque lacinia, sapien sit amet tempor laoreet, nibh urna rhoncus leo, quis rhoncus ante velit ac leo. Praesent malesuada, erat sit amet feugiat auctor, lorem dui tempus leo, nec aliquet ligula tellus ac risus.</p>
+                    </div>
+                    <div class="panel-footer">December 29, 2020</div>
+                    </div>
+                    </div>
+                    <div class="col-lg-4 col-xl-4">
+                    <div class="item">
+                    <h2 class="author"><i class="far fa-user-circle">&nbsp;</i>Jeffrey</h2>
+                    <i class="fa fa-quote-left"></i>
+                    <div class="quote">
+                    <p><strong>Loan Rockstar:</strong></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin placerat enim nec dapibus vestibulum. Integer et libero et enim posuere maximus ut vel libero. Fusce semper sem et nulla gravida, at ultricies turpis ultrices. Nullam a purus sed massa tincidunt finibus. Morbi nulla tortor, dictum et ante id, sodales auctor sapien. Etiam id nunc maximus mi elementum dapibus nec sed urna. Integer sit amet sagittis mauris. Pellentesque lacinia, sapien sit amet tempor laoreet, nibh urna rhoncus leo, quis rhoncus ante velit ac leo. Praesent malesuada, erat sit amet feugiat auctor, lorem dui tempus leo, nec aliquet ligula tellus ac risus.</p>
+                    </div>
+                    <div class="panel-footer">December 20, 2020</div>
+                    </div>
+                    </div>
+                    <div class="col-lg-4 col-xl-4">
+                    <div class="item">
+                    <h2 class="author"><i class="far fa-user-circle">&nbsp;</i>John</h2>
+                    <i class="fa fa-quote-left"></i>
+                    <div class="quote">
+                    <p><strong>Ease and confidence:</strong></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin placerat enim nec dapibus vestibulum. Integer et libero et enim posuere maximus ut vel libero. Fusce semper sem et nulla gravida, at ultricies turpis ultrices. Nullam a purus sed massa tincidunt finibus. Morbi nulla tortor, dictum et ante id, sodales auctor sapien. Etiam id nunc maximus mi elementum dapibus nec sed urna. Integer sit amet sagittis mauris. Pellentesque lacinia, sapien sit amet tempor laoreet, nibh urna rhoncus leo, quis rhoncus ante velit ac leo. Praesent malesuada, erat sit amet feugiat auctor, lorem dui tempus leo, nec aliquet ligula tellus ac risus.</p>
+                    </div>
+                    <div class="panel-footer">December 19, 2020</div>
+                    </div>
+                    </div>
+                      <div class="col-lg-4 col-xl-4">
+                    <div class="item">
+                    <h2 class="author"><i class="far fa-user-circle">&nbsp;</i>Andrew</h2>
+                    <i class="fa fa-quote-left"></i>
+                    <div class="quote">
+                    <p><strong>Great Banker to Work With</strong><strong>:</strong></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin placerat enim nec dapibus vestibulum. Integer et libero et enim posuere maximus ut vel libero. Fusce semper sem et nulla gravida, at ultricies turpis ultrices. Nullam a purus sed massa tincidunt finibus. Morbi nulla tortor, dictum et ante id, sodales auctor sapien. Etiam id nunc maximus mi elementum dapibus nec sed urna. Integer sit amet sagittis mauris. Pellentesque lacinia, sapien sit amet tempor laoreet, nibh urna rhoncus leo, quis rhoncus ante velit ac leo. Praesent malesuada, erat sit amet feugiat auctor, lorem dui tempus leo, nec aliquet ligula tellus ac risus.</p>
+                    </div>
+                    <div class="panel-footer">December 29, 2020</div>
+                    </div>
+                    </div>
+                    <div class="col-lg-4 col-xl-4">
+                    <div class="item">
+                    <h2 class="author"><i class="far fa-user-circle">&nbsp;</i>Jeffrey</h2>
+                    <i class="fa fa-quote-left"></i>
+                    <div class="quote">
+                    <p><strong>Loan Rockstar:</strong></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin placerat enim nec dapibus vestibulum. Integer et libero et enim posuere maximus ut vel libero. Fusce semper sem et nulla gravida, at ultricies turpis ultrices. Nullam a purus sed massa tincidunt finibus. Morbi nulla tortor, dictum et ante id, sodales auctor sapien. Etiam id nunc maximus mi elementum dapibus nec sed urna. Integer sit amet sagittis mauris. Pellentesque lacinia, sapien sit amet tempor laoreet, nibh urna rhoncus leo, quis rhoncus ante velit ac leo. Praesent malesuada, erat sit amet feugiat auctor, lorem dui tempus leo, nec aliquet ligula tellus ac risus.</p>
+                    </div>
+                    <div class="panel-footer">December 20, 2020</div>
+                    </div>
+                    </div>
+                    <div class="col-lg-4 col-xl-4">
+                    <div class="item">
+                    <h2 class="author"><i class="far fa-user-circle">&nbsp;</i>John</h2>
+                    <i class="fa fa-quote-left"></i>
+                    <div class="quote">
+                    <p><strong>Ease and confidence:</strong></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin placerat enim nec dapibus vestibulum. Integer et libero et enim posuere maximus ut vel libero. Fusce semper sem et nulla gravida, at ultricies turpis ultrices. Nullam a purus sed massa tincidunt finibus. Morbi nulla tortor, dictum et ante id, sodales auctor sapien. Etiam id nunc maximus mi elementum dapibus nec sed urna. Integer sit amet sagittis mauris. Pellentesque lacinia, sapien sit amet tempor laoreet, nibh urna rhoncus leo, quis rhoncus ante velit ac leo. Praesent malesuada, erat sit amet feugiat auctor, lorem dui tempus leo, nec aliquet ligula tellus ac risus.</p>
+                    </div>
+                    <div class="panel-footer">December 19, 2020</div>
+                    </div>
+                    </div>
+                    </div>
+                    <footer>
+                        <li><a href="index.html" id="foot-home">Home</a></li>
+                        <li><a href="rent.html" id="foot-rent">Rent</a></li>
+                        <li><a href="sign-up.html" id="foot-sign">Sign Up</a></li>
+                        <li><a href="login.html" id="foot-login">Login</a></li>
+                        <div id="copy_right">&copy; 2021</div>
+                    </footer>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="app.js"></script>
+<script src="script.js"></script>
+</html>

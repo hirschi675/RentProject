@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent It</title>
+    <link rel="stylesheet" href="icons/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="rent.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" crossorigin="anonymous">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="app">
+        <div id="alert-bar">
+            <a id="alert" href="index.html"><div id="covid"> Covid-19 Response & Regulations</div></a>
+        </div>
+        <nav>
+            <a href="index.html" id="logo"><img src="./images/rent_items_logo.jpg" alt="logo" height="60px"></a>
+            <ul id="myNav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="rent.html">Rent</a></li>
+                <li><a href="sign-up.html">Sign Up</a></li>
+                <li><a href="login.html">{{currentLogin}}</a></li>
+                <li><a href="create.html">Create</a></li>
+            </ul>
+        </nav>
+            <div class="wrap">
+                <div class="search">
+                   <input type="text" class="searchTerm" placeholder="What are you looking for?">
+                   <button type="submit" class="searchButton">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
+             </div>
+            <div id="items-rent-area">     
+                <div v-for="item in items">
+                    <div class="item"> 
+                        <div v-if="activityimg">
+                            <img v-bind:src="'uploads/' + item.image" class="picture" height="200" width="200"/><br>
+                        </div>
+                        <div v-if="toolimg">
+                            <img v-bind:src="'uploads/' + item.image" class="picture" height="200" width="200"/><br>
+                        </div>
+                        <div v-if="technologyimg">
+                            <img v-bind:src="'uploads/' + item.image" class="picture" height="200" width="200"/><br>
+                        </div>
+                        <div class="name"> {{ item.name }} </div>
+                        <div class="price"> ${{ item.price }}.00</div>
+                        <div class="description"> {{item.description}}</div>
+                        <button type="submit" id="rent-button" class="rent-button" v-on:click="rentItem(item)">Purchase</button>
+                    </div>
+                </div>     
+            </div>
+            <div id="settings">
+                <div id="category">
+                    <h2 class="header2">Category</h2>
+                    <div id="showOp" class="options" style="list-style-type: none;">
+                        <button v-on:click="displayActivities" id="submit" class="button" ><li >Activities</li></button><br><br>
+                        <button v-on:click="displayTools" style="font-size: 22px;" class="button"><li>Tools</li></button><br><br>
+                        <button v-on:click="displayTechnologies" style="font-size: 22px;" class="button"><li>Technology</li></button>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <footer>
+        <li><a href="index.html" id="foot-home">Home</a></li>
+        <li><a href="rent.html" id="foot-rent">Rent</a></li>
+        <li><a href="sign-up.html" id="foot-sign">Sign Up</a></li>
+        <li><a href="login.html" id="foot-login">Login</a></li>
+        <div id="copy_right">&copy; 2021</div>
+    </footer>
+
+    <!-- This connects to the strip checkout api using my key -->
+    <script id="stripescript" src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_51IddguFQxaJB0xPODKcjJcpaHzL6pO89wRw5DRD9Bg7IcTQgVPeWw6YljboUSv7kvUPySx5mYt713zWVsy6JZmWw00XXoeEUlW"
+    data-amount="5000"
+    data-name="Rent It Out"
+    data-description="Make all your dreams come true"
+    data-locale="auto">
+    </script>
+    <!-- This is the Stripe Form -->
+    <div style="display: none">
+        <form action="/charge" method="POST">
+            <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="pk_test_51IddguFQxaJB0xPODKcjJcpaHzL6pO89wRw5DRD9Bg7IcTQgVPeWw6YljboUSv7kvUPySx5mYt713zWVsy6JZmWw00XXoeEUlW"
+            data-amount=""
+            data-name="Rent It Out"
+            data-description="Make all your dreams come true"
+            data-image="images/marketplace.png"
+            data-locale="auto">
+            </script>
+            <script>
+            // Hide default stripe button
+            document.getElementsByClassName('stripe-button-el')[0].style.display = 'none';
+            </script>
+            <button type="submit" class="rent-button">Purchase</button>
+        </form>
+    </div>
+</body>
+
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('myInput');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myUL");
+  li = ul.getElementsByTagName('li');
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+</script>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="app.js"></script>
+<script src="script.js"></script>
+</html>
