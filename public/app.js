@@ -16,7 +16,7 @@ itemData += "&image=" + encodeURIComponent(item.image);
 itemData += "&category=" + encodeURIComponent(item.category);
 itemData += "&rented=" + encodeURIComponent(item.rented);
 // return fetch("http://localhost:8080/items/items/" + item.id, {
-return fetch("https://example.ondigitalocean.app/rent-project/items/items/" + item.id, {
+return fetch("https://rent-project-y4xry.ondigitalocean.app/items/items/" + item.id, {
 method: "PUT",
 body: itemData,
 headers: {
@@ -35,7 +35,7 @@ itemData += "&image=" + encodeURIComponent(item.description);
 itemData += "&category=" + encodeURIComponent(item.category);
 itemData += "&rented=" + encodeURIComponent(false);
 // return fetch("http://localhost:8080/items/items", {
-return fetch("https://example.ondigitalocean.app/rent-project/items/items", {
+return fetch("https://rent-project-y4xry.ondigitalocean.app/items/items", {
   method: "POST",
   body: itemData,
   headers: {
@@ -49,7 +49,7 @@ function authenticateUser(email, password) {
 let data = "email=" + encodeURIComponent(email);
 data += "&plainPassword=" + encodeURIComponent(password);
 // return fetch("http://localhost:8080/session", {
-return fetch("https://example.ondigitalocean.app/rent-project/session", {
+return fetch("https://rent-project-y4xry.ondigitalocean.app/session", {
   credentials: "include",
   body: data,
   method: "POST",
@@ -63,7 +63,7 @@ return fetch("https://example.ondigitalocean.app/rent-project/session", {
 function createCategoryOnServer(category) {
   var categoryData = "name=" + encodeURIComponent(category.name);
   // return fetch("http://localhost:8080/items/categories", {
-  return fetch("https://example.ondigitalocean.app/rent-project/categories", {
+  return fetch("https://rent-project-y4xry.ondigitalocean.app/categories", {
     method: "POST",
     body: categoryData,
     headers: {
@@ -77,7 +77,7 @@ function createUserOnServer(user) {
   userData += "&username=" + encodeURIComponent(user.user);
   userData += "&password=" + encodeURIComponent(user.plainPassword);
   // return fetch("http://localhost:8080/items/users", {
-  return fetch("https://example.ondigitalocean.app/rent-project/items/users", {
+  return fetch("https://rent-project-y4xry.ondigitalocean.app/items/users", {
     method: "POST",
     body: userData,
     headers: {
@@ -88,19 +88,19 @@ function createUserOnServer(user) {
 
 function getItemsFromServer(category) {
   // return fetch("http://localhost:8080/items/categories/" + category + "/items");
-  return fetch("https://example.ondigitalocean.app/rent-project/items/categories/" + category + "/items");
+  return fetch("https://rent-project-y4xry.ondigitalocean.app/items/categories/" + category + "/items");
 }
 
 function getSession() {
   // return fetch("http://localhost:8080/session", {
-  return fetch("https://example.ondigitalocean.app/rent-project/session", {
+  return fetch("https://rent-project-y4xry.ondigitalocean.app/session", {
     credentials: "include",
   });
 }
 
 function deleteSession()  {
   // return fetch("http://localhost:8080/session", {
-  return fetch("https://example.ondigitalocean.app/rent-project/session", {
+  return fetch("https://rent-project-y4xry.ondigitalocean.app/session", {
     method: "DELETE",
     credentials: "include",
   });
