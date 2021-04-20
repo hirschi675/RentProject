@@ -47,7 +47,6 @@ body {
 }
 
 #covid:hover {
-    border-bottom: solid rgb(57, 154, 224) 1px;
     color: rgb(57, 154, 224);
 }
 
@@ -338,7 +337,7 @@ footer {
     .fa-quote-left{
       margin-left: 10px;
       font-size: 20px;
-      color: #5d8f66;
+      color: #348aa7;
     }
     
     .item {
@@ -361,7 +360,7 @@ footer {
     .author {
       text-align: center;
       text-transform: uppercase;
-      background: #5d8f66;
+      background: #348aa7;
       color: #fff;
       margin-top: 0;
       padding: 1rem 0;

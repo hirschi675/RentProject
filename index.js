@@ -74,33 +74,6 @@ const Item = model.Item;
 const Category = model.Category;
 const User = model.User;
 
-
-// app.post('/upload', (req, res) => {
-//   upload(req, res, (err) =>  {
-//     console.log("LOGAN LOOK HERE", req.body)
-//     if(err) {
-//       res.render('index', {
-//         msg: err
-//       });
-//     }
-//     else {
-//       if(req.file == undefined){
-//         console.log("No file was found")
-//       } else {
-//         console.log("File Found")
-//         // res.json(req.file.filename);
-//         // res.redirect('create.html');
-//       }
-//       res.render('index', {
-//         msg: 'File Uploaded!',
-//         file: `uploads/${req.file.filename}`,
-//       })
-//       // res.json(req.file.filename);
-//       // res.redirect('create.html');
-//     }
-//   })
-// });
-
 // 1. local strategy implementation
 passport.use(new passportLocal.Strategy({
   usernameField: "email",
@@ -171,7 +144,6 @@ app.delete('/session', function(req, res){
 app.get('/items/categories', (req, res) => {
   console.log("GETTING CATEFORIES");
   console.log("Does nodemon work");
-  // return a list of categories
     model.Item.find().populate('category').then((categories) => {
     console.log("categories queried from DB:", catgories);
     res.json(categories);
@@ -222,7 +194,7 @@ app.post('/items/items', (req, res) => {
       name: req.body.myName,
       price: req.body.myPrice,
       // owner: myUser,
-      owner: "606fba20e15eeb54f627fdf6",
+      // owner: "606fba20e15eeb54f627fdf6",
       owner: req.body.myUser,
       description: req.body.myDescription,
       image: req.file.filename,
@@ -251,6 +223,35 @@ app.post('/items/items', (req, res) => {
 });
 
 
+app.put("/items/items/:itemId", (request, response) => {
+  console.log("Update Request here", request.params.itemId);
+  Item.findOne({ _id: request.params.itemId}).then((item) => {
+      // response.setHeader("Access-Control-Allow-Origin", "*");
+      if(item) {
+          item.name = request.body.name;
+          item.price = request.body.price;
+          item.owner = request.body.owner;
+          item.description = request.body.description;
+          item.image = request.body.image;
+          item.category = request.body.category;
+          item.rented = request.body.rented;
+          item.save().then(() => {
+              console.log('Item Updated!');
+              response.setHeader("Access-Control-Allow-Origin", "*");
+              response.sendStatus(200);
+          }).catch((err) =>  {
+              response.sendStatus(500);
+          });
+      }
+      else {
+          response.sendStatus(404);
+      }
+  }).catch((err) => {
+      response.sendStatus(400);
+  });
+});
+
+
 app.get('/', (req, res) => {
   res.render('index');
 })
@@ -272,7 +273,7 @@ app.post('/charge', (req, res) => {
 
 
 app.get("/items/categories/:categoryId/items", (request, response) => {
-  model.Item.find({category: request.params.categoryId}).then((items) => {
+  Item.find({category: request.params.categoryId}).then((items) => {
       response.setHeader("Access-Control-Allow-Origin", "*");
       if(items) {
           response.json(items);
@@ -290,8 +291,8 @@ app.get("/items/categories/:categoryId/items", (request, response) => {
 
 
 // retrieve existing item member
-app.get('/items/items/:itemsId', (req, res) => {
-  model.Item.findOne({ _id: req.params.itemsId }).then((item) => {
+app.get('/items/items/:itemId', (req, res) => {
+  Item.findOne({ _id: req.params.itemId }).then((item) => {
     if (item) {
       res.json(item);
     } else {
@@ -302,33 +303,8 @@ app.get('/items/items/:itemsId', (req, res) => {
   })
 })
 
-// update existing item member
-app.put('/items/items/:itemsId', (req, res) => {
-  model.Item.findOne({ _id: req.params.itemsId }).then((item) => {
-    if (item) {
-      item.name = req.body.name;
-      item.price = req.body.price;
-      item.owner = req.body.owner;
-      item.meat = req.body.amount;
-
-      item.save().then(() => {
-        console.log('item updated!');
-        res.sendStatus(200);
-      }).catch((err) => {
-        // problem saving
-        res.sendStatus(500);
-      });
-    } else {
-      res.sendStatus(404);
-    }
-  }).catch((err) => {
-    // problem querying
-    res.sendStatus(400);
-  })
-})
-
-app.delete("/items/items/:itemsId" , (request, response) => {
-  List.findOne({ _id: request.params.listId}).then((list) => { 
+app.delete("/items/items/:itemId" , (request, response) => {
+  Item.findOne({ _id: request.params.itemId}).then((list) => { 
       if(list){
           list.delete().then(() => {
               response.setHeader("Access-Control-Allow-Origin", "*");
@@ -355,12 +331,7 @@ app.post('/items/users', (req, res) => {
       email: req.body.email,  
       username: req.body.username,  
   });
-  // plainpassword is the password that the users pass into the input.
   user.setEncryptedPassword(req.body.password, function () { 
-  // bcrypt.hash(req.body.password, 12).then(function (hash) {
-    //Store hash in your password DB
-    // user.encryptedPassword = hash;
-
       user.save().then( (user) => {
           console.log("User Created!", user);
           res.sendStatus(201);
@@ -395,6 +366,22 @@ const strypeSecretKey = "sk_test_51IddguFQxaJB0xPOTqhmXuxtTRe6Z8UTtP5oB4Kpxsz5Mg
 app.get('/store', function(req, res) {
   console.log("accessing the store");
 });
+
+app.post('/purchase', function(req, res) {
+  console.log(req.body.price, "Price");
+  const charge = stripe. charges.create({
+    amount: req.body.price,
+    source: req.body.stripeTokenId,
+    currency: 'usd'
+  }).then(function() {
+    console.log('Charge Successful')
+    res.json({ message: 'Successfully purchased items' })
+  }).catch(function() {
+    console.log('Charge Fail')
+    res.status(500).end()
+  })
+  console.log("This is the charge", charge);
+})
 
 app.post('/api/checkout', (req, res) => { 
   res.sendStatus(200);
