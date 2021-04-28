@@ -11,6 +11,41 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" crossorigin="anonymous">
 <script src="https://js.stripe.com/v3/"></script>
 <script src="https://checkout.stripe.com/checkout.js"></script>
+<script type="text/x-template" id="modal-template">
+    <transition name="modal">
+      <div class="modal-mask">
+        <div class="modal-wrapper">
+          <div class="modal-container">
+
+            <!-- <form method="post" action="process.php" > -->
+            <form action="/items/email" method="POST" enctype="multipart/form-data" style="text-align: center;">
+                <h2>Please fill in the form below</h2>
+
+                <input id="first-name" type="text" required placeholder="First name" name="First-Name" style="">
+                <br>
+                <input type="text" required placeholder="Last name" name="Last-Name">
+                <br>
+                <input id="eml" type="email" required placeholder="email@" name="Email">
+                <br>
+                <input id="tel" type="tel" placeholder="Phone Number" name="Phone-Number">
+                <br>
+                <textarea rows="6" required placeholder="Message" name="Message"></textarea>
+                <br>
+                <button type="submit">Submit</button>
+            </form>
+            <div class="modal-footer">
+              <slot name="footer">
+                <button class="modal-default-button" @click="$emit('close')">
+                  OK
+                </button>
+              </slot>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
+  </script>
+
 </head>
 <body>
     <div id="wrapper">
@@ -56,6 +91,16 @@
                         </div>
                     </div>
                     <div v-else>
+                        <button id="show-modal" @click="showModal = true" v-on:click="emailRentor(item)">Email User</button>
+                        <!-- use the modal component, pass in the prop -->
+                        <modal v-if="showModal" @close="showModal = false">
+                              <!--
+                            you can use custom content here to overwrite
+                            default content
+                            -->
+                                <h3 slot="header">Email Rentor</h3>
+                            </modal>
+                        <!-- <button v-on:click="emailRentor(item)">Email User</button> -->
                         <button v-on:click="unrentItem(item)">Unrent Item {{item.name}}</button>
                     </div>
                 </div>     
@@ -101,7 +146,6 @@ function myFunction() {
   }
 }
 </script>
-
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="app.js"></script>
 <script src="script.js"></script>

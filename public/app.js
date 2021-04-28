@@ -44,6 +44,14 @@ return fetch("https://rent-project-y4xry.ondigitalocean.app/items/items", {
 });
 }
 
+function getUserById(user) {
+  console.log(user, "LOGAN YOU NEED TO LOOK HERE")
+  // return fetch("http://localhost:8080/items/users/" + user.id, {
+  return fetch("https://rent-project-y4xry.ondigitalocean.app/items/users" + user.id, {
+    credentials: "include",
+  });
+}
+
 function authenticateUser(email, password) {
 // console.log(email, password, "THIS IS THE EMAIL AND PASSWORD");
 let data = "email=" + encodeURIComponent(email);
@@ -107,6 +115,9 @@ function deleteSession()  {
   
 }
   
+Vue.component("modal", {
+  template: "#modal-template"
+});
 
   
 var app = new Vue({
@@ -134,6 +145,7 @@ var app = new Vue({
     itemBought: false,
     activityimg: false,
     technologyimg: false,
+    showModal: false,
     signEmail: "",
     signUserInput: "",
     signPassword: "",
@@ -340,6 +352,16 @@ var app = new Vue({
         if (response.status == 200) {
           console.log("Changed")
         } else {
+          updateItemOnServer({
+            id: item._id,
+            name: item.name,
+            price: item.price,
+            owner: item.owner,
+            description: item.description,
+            image: item.image,
+            category: item.category,
+            rented: false,
+          })
           console.log("couldn't items");
           alert("Items didn't load");
         }
@@ -347,6 +369,17 @@ var app = new Vue({
       stripeHandler.open({
         amount: item.price*100,
       })
+    },
+    emailRentor: function (item) {
+      console.log(item);
+      getUserById({id: item.owner}).then((response) => {
+        if (response.status == 200) {
+          response.json().then((data) => {
+            console.log("THIS IS THE DATA", data.email);
+            
+          });
+        }
+      });
     },
     unrentItem: function (item) {
       console.log("Unrenting item", item, item._id);

@@ -1,3 +1,6 @@
+
+require('dotenv').config();
+
 const express = require('express');
 const stripe = require('stripe')('sk_test_51IddguFQxaJB0xPOTqhmXuxtTRe6Z8UTtP5oB4Kpxsz5MgyUKtbswA91h6c5asmZ0s963i1QYrcslkau2va6d4AK00byR9c5O3');
 const bodyParser = require('body-parser');
@@ -6,18 +9,19 @@ const session = require('express-session');
 const cors = require('cors');
 const path = require('path');
 const model = require('./model');
+const nodemailer = require('nodemailer');
 const passport = require('passport');
 const passportLocal = require('passport-local');
 const ejs = require('ejs');
 
 
+
 const multer = require('multer');
+const { getMaxListeners } = require('process');
 // const upload = multer({dest: __dirname + '/uploads/images'});
 
 const app = express()
 const port = 8080;
-
-// Set Storage Engine
 
 const storage = multer.diskStorage({
   destination: './public/uploads/', 
@@ -356,6 +360,65 @@ app.post('/items/users', (req, res) => {
 });
 
 
+app.get("/items/users/:userId", (request, response) => {
+  if (!request.user) {
+      response.sendStatus(401);
+      return;
+  }
+  console.log(request.params.userId, "THIS HOSULD BE USEFULL");
+  model.User.findById(request.params.userId).then((users) => {
+  //   response.setHeader("Access-Control-Allow-Origin", "*");
+    if(users) {
+      console.log("User HERE", users);
+      response.json(users);
+    }
+    else {
+      console.log("Does this print")
+        response.sendStatus(404);
+    }
+  }).catch((err) => {
+      response.sendStatus(400);
+   });
+
+});
+
+
+
+app.post('/items/email', function(req, res) {
+  console.log("DOES THIS POINT REACH");
+  // let transporter = nodemailer.createTransport({
+  //   service: 'gmail',
+  // })
+
+  const transporter = nodemailer.createTransport({
+    // host: "rent-project-y4xry.ondigitalocean.app", //Host
+    host: 'rent-project-y4xry.ondigitalocean.app',
+    port: 8080,
+    secure: true,
+    auth: {
+      user: 'loganhirschi@gmail.com',
+      pass: '5D6d7d8d!!'
+  }
+  });
+
+  let mailOptions = {
+    from: 'loganhirschi@gmail.com',
+    to: 'loganhirschi@gmail.com',
+    subject: 'Testing and Testing',
+    text: 'It worked'
+  }
+  
+  transporter.sendMail(mailOptions, function(err, data) {
+    if (err) {
+      console.log("Error Occured", err);
+    }
+    else {
+      console.log("Email User")
+    }
+  });
+});
+
+
 
 
 // STRIPE TEST
@@ -376,6 +439,7 @@ app.post('/purchase', function(req, res) {
   }).then(function() {
     console.log('Charge Successful')
     res.json({ message: 'Successfully purchased items' })
+    res.send(200);
   }).catch(function() {
     console.log('Charge Fail')
     res.status(500).end()
