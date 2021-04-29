@@ -21,15 +21,20 @@
             <form action="/items/email" method="POST" enctype="multipart/form-data" style="text-align: center;">
                 <h2>Please fill in the form below</h2>
 
-                <input id="first-name" type="text" required placeholder="First name" name="First-Name" style="">
+                <input id="first-name" type="text" required placeholder="First name" name="firstName" style="">
                 <br>
-                <input type="text" required placeholder="Last name" name="Last-Name">
+                <input type="text" required placeholder="Last name" name="lastName">
                 <br>
-                <input id="eml" type="email" required placeholder="email@" name="Email">
+                <input id="eml" type="email" required placeholder="email@" name="email">
                 <br>
-                <input id="tel" type="tel" placeholder="Phone Number" name="Phone-Number">
+                <input id="psw" type="password" required placeholder="password" name="password">
                 <br>
-                <textarea rows="6" required placeholder="Message" name="Message"></textarea>
+                <input id="tel" type="tel" placeholder="Phone Number" name="number">
+                <br>
+                <input id="sub" type="text" placeholder="Subject" name="subject">
+                <br>
+                <input id="userEmailId" type="text" placeholder="user" name="user" style="display: none;">
+                <textarea rows="6" required placeholder="Message" name="message"></textarea>
                 <br>
                 <button type="submit">Submit</button>
             </form>
@@ -102,6 +107,8 @@
                             </modal>
                         <!-- <button v-on:click="emailRentor(item)">Email User</button> -->
                         <button v-on:click="unrentItem(item)">Unrent Item {{item.name}}</button>
+                        <br>
+                        <br>
                     </div>
                 </div>     
             </div>
@@ -146,6 +153,7 @@ function myFunction() {
   }
 }
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="app.js"></script>
 <script src="script.js"></script>

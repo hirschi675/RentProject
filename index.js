@@ -389,33 +389,40 @@ app.post('/items/email', function(req, res) {
   // let transporter = nodemailer.createTransport({
   //   service: 'gmail',
   // })
-
-  const transporter = nodemailer.createTransport({
-    // host: "rent-project-y4xry.ondigitalocean.app", //Host
-    host: 'rent-project-y4xry.ondigitalocean.app',
-    port: 8080,
-    secure: true,
-    auth: {
-      user: 'loganhirschi@gmail.com',
-      pass: '5D6d7d8d!!'
-  }
-  });
-
-  let mailOptions = {
-    from: 'loganhirschi@gmail.com',
-    to: 'loganhirschi@gmail.com',
-    subject: 'Testing and Testing',
-    text: 'It worked'
-  }
+  const userEmail = req.user.email;
+  upload(req, res, (err) => {
+    const transporter = nodemailer.createTransport({
+      // host: "rent-project-y4xry.ondigitalocean.app", //Host
+      service: "gmail",
+      secure: true,
+      auth: {
+        user: req.body.email,
+        pass: req.body.password
+    }
+    });
   
-  transporter.sendMail(mailOptions, function(err, data) {
-    if (err) {
-      console.log("Error Occured", err);
+    console.log("to", req.body.user);
+    console.log("from", req.body.email);
+    let mailOptions = {
+      from: req.body.email,
+      to: req.body.user,
+      subject: req.body.subject,
+      text: req.body.message
     }
-    else {
-      console.log("Email User")
-    }
+    
+    transporter.sendMail(mailOptions, function(err, data) {
+      if (err) {
+        console.log("Error Occured", err);
+        res.status(500).end();
+      }
+      else {
+        console.log("Email User")
+        // res.sendStatus(200);
+        res.redirect("../rent.html")
+      }
+    });
   });
+  
 });
 
 
@@ -439,7 +446,7 @@ app.post('/purchase', function(req, res) {
   }).then(function() {
     console.log('Charge Successful')
     res.json({ message: 'Successfully purchased items' })
-    res.send(200);
+    res.sendStatus(200);
   }).catch(function() {
     console.log('Charge Fail')
     res.status(500).end()
